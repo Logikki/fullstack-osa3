@@ -1,0 +1,7 @@
+POST http://afternoon-fjord-55825.herokuapp.com/api/persons
+Content-Type: application/json
+
+{ 
+"name": "Arto Testi", 
+"number": "040-122356"
+}

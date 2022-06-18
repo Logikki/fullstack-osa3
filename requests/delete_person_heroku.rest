@@ -1,0 +1,1 @@
+DELETE http://afternoon-fjord-55825.herokuapp.com/api/persons/4
