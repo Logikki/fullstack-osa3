@@ -24,12 +24,20 @@ app.get('/api/persons', (req, response) => {
     })
 
 app.get('/info', (req,res) => {
-    let entries = persons.length
-    let date = new Date().toString()
-    page = `<p>Phonebook has info for ${entries} people</p> 
+  let date = new Date().toString()
+  var query = Person.find();
+query.count(function (err, count) {
+    if (err) {console.log(err)}
+    else {
+      page = `<p>Phonebook has info for ${count} people</p> 
             <p>${date}</p>`
+      res.send(page)
+    }
+})
+    
+    
 
-    res.send(page)
+    
 
 })
 
@@ -104,6 +112,9 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
+  }
+  else if (error.name === 'validationError') {
+    return response.status(400).json({error: error.message})
   }
 
   next(error)
